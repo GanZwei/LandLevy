@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="Description" content=""/>
+<meta name="keywords" content=""/>
+<title>青海省征地信息公开系统-系统登录</title>
+<link type="text/css" rel="stylesheet" href="../themes/base.css" />
+<link type="text/css" rel="stylesheet" href="../themes/login.css" />
+<script type="text/javascript" src="../javascript/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+
+function submitinfor(){
+	var username =$("#username").val();
+	if(username=="admin"){
+		location.href="default.html";
+		}else{
+			$(".errorbox").slideDown();
+			}
+	}
+document.onkeydown = function (e)
+{
+    var ev = document.all ? window.event : e;
+    if (ev.keyCode == 13) {
+        submitinfor();
+    }
+}
+
+</script>
+</head>
+
+<body>
+<div class="warp warpBg">
+<header>
+  <h1 class="systitle">青海省征地信息公开系统</h1>
+</header>
+
+<div class="loginbox">
+<div class="errorbox"><i class="error"></i>用户名或密码错误，请重新输入！</div>
+<div class="logongroup">
+<input class="intext" id="username" type="text" value="admin" placeholder="用户名" />
+<i class="user"></i>
+</div>
+<div class="logongroup">
+<input class="intext" id="passworder" type="password" value="" placeholder="密码" />
+<i class="password"></i>
+</div>
+<div class="logongroup submitbox">
+<button class="submitbtn" type="submit" onclick="submitinfor()">登&nbsp;&nbsp;录</button>
+</div>
+</div>
+<div class="copyright">推荐IE8或以上版本浏览器，分辨率1280*800或以上显示器使用本系统</div>
+</div>
+<div class="messageBox">
+<div class="messageBoxContent">
+  <div class="messageMain">
+    <ul>
+      <li class="messageItem">
+        <div class="messageTime"> <i class="lineBg"></i><b class="timePoint"></b><p class="timeBlock">2017-06-05<br />21:21</p></div>
+        <div class="messageBlock">
+        <h2 class="messageItemTitle">2017年度西商村拟征收土地公告</h2>
+        <p class="cmessageContent">项目由省厅发起，项目位置西宁市上东区，项目文号ABC-123456。</p>
+        <a class="messageTodo" href="plan.html">立即处理</a>
+        </div>
+      </li>
+      <li class="messageItem">
+        <div class="messageTime"> <i class="lineBg"></i><b class="timePoint"></b><p class="timeBlock">2017-06-05<br />21:21</p></div>
+        <div class="messageBlock">
+        <h2 class="messageItemTitle">2017年度西商村拟征收土地公告</h2>
+        <p class="cmessageContent">项目由省厅发起，项目位置西宁市上东区，项目文号ABC-123456。</p>
+        <a class="messageTodo" href="plan.html">立即处理</a>
+        </div>
+      </li>
+      <li class="messageItem">
+        <div class="messageTime"> <i class="lineBg"></i><b class="timePoint"></b><p class="timeBlock">2017-06-05<br />21:21</p></div>
+        <div class="messageBlock">
+        <h2 class="messageItemTitle">2017年度西商村拟征收土地公告</h2>
+        <p class="cmessageContent">项目由省厅发起，项目位置西宁市上东区，项目文号ABC-123456。</p>
+        <a class="messageTodo" href="plan.html">立即处理</a>
+        </div>
+      </li>
+    </ul><div class="loadMore">
+    <a href="javascript:;">加载更多</a>
+    </div>
+  </div>
+  </div>
+  <a class="closeMessageBox" href="javascript:;" onClick="closeMessage(this)"></a>
+ <script type="text/javascript">
+ function closeMessage(obj){
+	 $(obj).parent().slideUp("fast");
+	 }
+  function showMessage(){
+	  $(".messageBox").slideToggle("fast");
+	  }
+ </script>
+</div>
+</body>
+</html>

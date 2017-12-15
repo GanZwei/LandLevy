@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="Description" content=""/>
+<meta name="keywords" content=""/>
+<title>青海省征地信息公开系统-拟征收土地公告-新增</title>
+<link type="text/css" rel="stylesheet" href="../themes/base.css" />
+<link type="text/css" rel="stylesheet" href="../themes/default.css" />
+<link type="text/css" rel="stylesheet" href="../javascript/chosen/chosen.min.css" />
+<link type="text/css" rel="stylesheet" href="../javascript/artDialog-master/css/ui-dialog.css" />
+<link type="text/css" rel="stylesheet" href="../javascript/treeTable-1.4.2/default/jquery.treeTable.css" />
+<script type="text/javascript" src="../javascript/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../javascript/chosen/chosen.jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="../javascript/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="../javascript/artDialog-master/dist/dialog-plus-min.js"></script>
+<script type="text/javascript" src="../javascript/treeTable-1.4.2/jquery.treeTable.js"></script>
+<script type="text/javascript" src="../javascript/ueditor1_4_3-utf8-net/ueditor.config.js"></script>
+<script type="text/javascript" src="../javascript/ueditor1_4_3-utf8-net/ueditor.all.min.js"> </script>
+<script type="text/javascript">
+$(function(){
+	 var option = {
+                theme:'vsStyle',
+                expandLevel : 2,
+                beforeExpand : function($treeTable, id) {
+                    //判断id是否已经有了孩子节点，如果有了就不再加载，这样就可以起到缓存的作用
+                    if ($('.' + id, $treeTable).length) { return; }
+                    //这里的html可以是ajax请求
+                    var html = '<tr id="8" pId="6"><td><span class="tree_icon"><b class="treeName">碾伯镇</b></span></td><td></td><td align="right"><a href="javascript:;" class="normalLink editGroup">编辑</a><a href="javascript:;" class="normalLink dellinks">删除</a></td></tr>'
+                             + '<tr id="9" pId="6"><td><span class="tree_icon"><b class="treeName">碾伯镇</b></span></td><td></td><td align="right"><a href="javascript:;" class="normalLink editGroup">编辑</a><a href="javascript:;" class="normalLink dellinks">删除</a></td></tr>';
+
+                  // $treeTable.addChilds(html);
+                },
+                onSelect : function($treeTable, id) {
+                    window.console && console.log('onSelect:' + id);
+                    
+                }
+
+            };
+            $('#treeTable1').treeTable(option);
+
+            option.theme = 'default';
+            $('#treeTable2').treeTable(option);
+	});
+</script>
+</head>
+
+<body>
+<div class="header">
+  <h1 class="logoText">青海省征地信息公开系统</h1>
+  <div class="menuGroup">
+    <ul>
+      <li><a href="default.html" class="home"><i></i>首页</a></li>
+      <li><a href="javascript:;" onclick="showMessage(this)" class="message"><i><em class="iconState"></em></i>待办提醒</a></li>
+      <li><a href="setting.html" class="setting"><i></i>系统设置</a></li>
+      <li class="i_user"><a href="user.html" class="user"><i></i>我的账号</a>
+        <div class="userbox"> <span class="username"><em>西宁市大通县</em>张三：欢迎您！</span>
+          <div class="s_group">
+            <div class="it_group"><a href="changepassaord.html" class="grayColor">修改密码</a> </div>
+            <div class="it_group"><a href="login.html" class="s_btn">退出系统</a></div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="content">
+  <div class="wrp clearfix">
+    <div class="crumbs clearfix"><span class="backTo"><a href="javascript:history.go(-1)" class="backToIcon"></a><a class="backLinks heightColor" href="javascript:history.go(-1)">拟征收土地公告</a><b class="partLine grayColor">/</b><b>新增拟征收土地公告</b></span></div>
+    <div class="processWrap">
+      <div class="processBox fiveStep"><!--定义步数，系统自动分配宽度-->
+        <div class="percentage"></div>
+        <div class="pocessLine"> <span class="processPoint passed"> <em class="percentage"></em> <i class="pointIcon"></i> <b class="ponitText">省厅发起项目</b> </span> <span class="processPoint active"> <em class="percentage"></em> <i class="pointIcon"></i> <b class="ponitText">县级填报</b> </span> <span class="processPoint"> <em class="percentage"></em> <i class="pointIcon"></i> <b class="ponitText">市（州）填报</b> </span> <span class="processPoint"> <em class="percentage"></em> <i class="pointIcon"></i> <b class="ponitText">省厅同意发布</b> </span> <span class="processPoint"> <em class="percentage"></em> <i class="pointIcon"></i> <b class="ponitText">发布成功</b> </span> </div>
+      </div>
+    </div>
+    <div class="pulicBox">
+      <div class="newArticle">
+        <div class="msgEditlabel clearfix">
+          <div class="halfPart"> <em class="frmLabel">建设用地类型：</em>
+            <div class="frmInputBox frmInputBoxNoTextLimit"> 单独选址项目 </div>
+            <!--<div class="pagesTips errorText" style="display:block;">一个字也没有，你还想保存？</div>--> 
+          </div>
+          <div class="halfPart"> <em class="frmLabel">填报发起时间：</em>
+            <div class="frmInputBox frmInputBoxNoTextLimit"> 2017-06-05 17:40 </div>
+            <!--<div class="pagesTips errorText" style="display:block;">一个字也没有，你还想保存？</div>--> 
+          </div>
+        </div>
+        <div class="msgEditlabel clearfix">
+          <div class="halfPart"> <em class="frmLabel">用地项目名称：</em>
+            <div class="frmInputBox frmInputBoxNoTextLimit"> 2017年度西商村拟征收土地公告 </div>
+            <!--<div class="pagesTips errorText" style="display:block;">一个字也没有，你还想保存？</div>--> 
+          </div>
+          <div class="halfPart"> <em class="frmLabel">批准文号</em>
+            <div class="frmInputBox frmInputBoxNoTextLimit"> ABC-123456 </div>
+          </div>
+        </div>
+        <div class="msgEditlabel clearfix">
+          <div class="halfPart"> <em class="frmLabel">批准年度：</em>
+            <div class="frmInputBox frmInputBoxNoTextLimit"> 2016 </div>
+            <!--<div class="pagesTips errorText" style="display:block;">一个字也没有，你还想保存？</div>--> 
+          </div>
+        </div>
+        <div class="msgEditlabel clearfix">
+          <div class="halfPart"> <em class="frmLabel">项目位置：</em>
+            <div class="frmInputBox frmInputBoxNoTextLimit"> 西宁市上东市上东县 </div>
+            
+            <!--<div class="pagesTips errorText" style="display:block;">一个字也没有，你还想保存？</div>--> 
+          </div>
+        </div>
+        <div class="msgEditlabel clearfix">
+          <div class="halfPart"> <em class="frmLabel">所属村居：</em>
+            <div class="frmInputBox frmInputBoxNoTextLimit"> 将河路明天村 </div>
+            <!--<div class="pagesTips errorText" style="display:block;">一个字也没有，你还想保存？</div>--> 
+          </div>
+        </div>
+        <div class="subEditlabelBox">
+          <div class="dataGrild treeTable">
+            <table id="treeTable1" style="width:100%">
+              <tr>
+                <th align="left"><span class="fieldBlock leftAlign">文件名称</span></th>
+                <th  align="left"><span class="fieldBlock leftAlign">公开类型</span></th>
+                <th  align="left"><span class="fieldBlock leftAlign">是否上传</span></th>
+                <th  align="left"><span class="fieldBlock rightAlign">操作</span></th>
+              </tr>
+              <tr id="1">
+                <td><span controller="true" class="tree_icon"><b class="treeName">省厅</b></span></td>
+                <td></td>
+                <td></td>
+                <td align="right"></td>
+              </tr>
+              <tr id="101" pId="1">
+                <td><span controller="true" class="tree_icon"><b class="treeName">国务院批准用地</b></span></td>
+                <td></td>
+                <td></td>
+                <td align="right"><a href="javascript:;" class="normalLink addGroup">查看文件</a></td>
+              </tr>
+              <tr id="101" pId="1">
+                <td><span controller="true" class="tree_icon"><b class="treeName">省级批准用地</b></span></td>
+                <td></td>
+                <td></td>
+                <td align="right"><a href="javascript:;" class="normalLink addGroup">查看文件</a></td>
+              </tr>
+              <tr id="3">
+                <td><span controller="true" class="tree_icon"><b class="treeName">县级填报</b></span></td>
+                <td></td>
+                <td></td>
+                <td align="right"></td>
+              </tr>
+              <tr id="4" pId="3">
+                <td><span controller="true" class="tree_icon"><b class="treeName">县（市、行、委）政府请示</b></span></td>
+                <td>依申请公开</td>
+                <td><span class="updateState yes">已上传</span></td>
+                <td align="right"><a href="javascript:;" class="normalLink addGroup">上传文件</a><a href="javascript:;" class="normalLink editGroup">编辑</a><a href="javascript:;" class="normalLink dellinks">删除文件</a></td>
+              </tr>
+              <tr id="5" pId="3">
+                <td><span controller="true" class="tree_icon"><b class="treeName">县（市、行、委）国土资源局审查报告</b></span></td>
+                <td>依申请公开</td>
+                <td><span class="updateState">未上传</span></td>
+                <td align="right"><a href="javascript:;" class="normalLink addGroup">上传文件</a><a href="javascript:;" class="normalLink editGroup">编辑</a><a href="javascript:;" class="normalLink dellinks">删除文件</a></td>
+              </tr>
+              <tr id="6" pid="3">
+                <td><span controller="true" class="tree_icon"><b class="treeName">一书四方案/一书三方案</b></span></td>
+                <td>主动公开</td>
+                <td></td>
+                <td align="right"></td>
+              </tr>
+              <tr id="601" pId="6">
+                <td><span controller="true">建设用地项目呈报说明书</span></td>
+                <td>主动公开</td>
+                <td><span class="updateState">未上传</span></td>
+                <td align="right"><a href="javascript:;" class="normalLink addGroup">上传文件</a><a href="javascript:;" class="normalLink editGroup">编辑</a><a href="javascript:;" class="normalLink dellinks">删除文件</a></td>
+              </tr>
+              <tr id="602" pId="6">
+                <td><span controller="true">农用地转用方案</span></td>
+                <td>主动公开</td>
+                <td><span class="updateState">未上传</span></td>
+                <td align="right"><a href="javascript:;" class="normalLink addGroup">上传文件</a><a href="javascript:;" class="normalLink editGroup">编辑</a><a href="javascript:;" class="normalLink dellinks">删除文件</a></td>
+              </tr>
+              <tr id="603" pId="6">
+                <td><span controller="true">补充耕地方案</span></td>
+                <td>主动公开</td>
+                <td><span class="updateState">未上传</span></td>
+                <td align="right"><a href="javascript:;" class="normalLink addGroup">上传文件</a><a href="javascript:;" class="normalLink editGroup">编辑</a><a href="javascript:;" class="normalLink dellinks">删除文件</a></td>
+              </tr>
+              <tr id="604" pId="6">
+                <td><span controller="true">征用土地方案</span></td>
+                <td>主动公开</td>
+                <td><span class="updateState">未上传</span></td>
+                <td align="right"><a href="javascript:;" class="normalLink addGroup">上传文件</a><a href="javascript:;" class="normalLink editGroup">编辑</a><a href="javascript:;" class="normalLink dellinks">删除文件</a></td>
+              </tr>
+              <tr id="605" pId="6">
+                <td><span controller="true">供地方案</span></td>
+                <td>主动公开</td>
+                <td><span class="updateState">未上传</span></td>
+                <td align="right"><a href="javascript:;" class="normalLink addGroup">上传文件</a><a href="javascript:;" class="normalLink editGroup">编辑</a><a href="javascript:;" class="normalLink dellinks">删除</a></td>
+              </tr>
+              <tr id="7" pid="3">
+                <td><span class="tree_icon"><b class="treeName">拟征收土地公告</b></span></td>
+                <td>主动公开</td>
+                <td><span class="updateState">未上传</span></td>
+                <td align="right"><a href="javascript:;" class="normalLink addGroup">上传文件</a><a href="javascript:;" class="normalLink editGroup">编辑</a><a href="javascript:;" class="normalLink dellinks">删除文件</a></td>
+              </tr>
+              <tr id="8" pid="3">
+                <td><span class="tree_icon"><b class="treeName">拟征收土地补偿安置方案公告</b></span></td>
+                <td>主动公开</td>
+                <td><span class="updateState">未上传</span></td>
+                <td align="right"><a href="javascript:;" class="normalLink addGroup">上传文件</a><a href="javascript:;" class="normalLink editGroup">编辑</a><a href="javascript:;" class="normalLink dellinks">删除文件</a></td>
+              </tr>
+              <tr id="9" pid="3">
+                <td><span class="tree_icon"><b class="treeName">征收土地公告</b></span></td>
+                <td>主动公开</td>
+                <td><span class="updateState">未上传</span></td>
+                <td align="right"><a href="javascript:;" class="normalLink addGroup">上传文件</a><a href="javascript:;" class="normalLink editGroup">编辑</a><a href="javascript:;" class="normalLink dellinks">删除文件</a></td>
+              </tr>
+              <tr id="10" pid="3">
+                <td><span class="tree_icon"><b class="treeName">其他材料</b></span></td>
+                <td></td>
+                <td></td>
+                <td align="right"><a href="javascript:;" class="normalLink addGroup">上传文件</a><a href="javascript:;" class="normalLink editGroup">编辑</a><a href="javascript:;" class="normalLink dellinks">删除文件</a></td>
+              </tr>
+              <tr id="1011" pid="10">
+                <td><span class="tree_icon"><b class="treeName">行政处罚决定书</b></span></td>
+                <td>依申请公开</td>
+                <td><span class="updateState">未上传</span></td>
+                <td align="right"><a href="javascript:;" class="normalLink addGroup">上传文件</a><a href="javascript:;" class="normalLink editGroup">编辑</a><a href="javascript:;" class="normalLink dellinks">删除文件</a></td>
+              </tr>
+            </table>
+            <script type="text/javascript">
+			   $(function(){
+				    $('.addGroup').on('click',
+    function() {
+        var d = dialog({
+            //title: '添加组',
+            content: '',
+			follow: this,
+            cancelValue: '取消',
+            okValue: '确定',
+            ok: function() {},
+			quickClose: true,
+            cancel: function() {}
+        });
+        var elem = $("#addGroup");
+        d.content(elem).show();
+    });
+	
+	$('.editGroup').on('click',
+    function() {
+        var d = dialog({
+            //title: '添加组',
+			width:720,
+            content: '',
+			//follow: this,
+            cancelValue: '取消',
+            okValue: '确定',
+            ok: function() {},
+			//quickClose: true,
+            cancel: function() {}
+        });
+        var elem = $("#editGroup");
+        d.content(elem).showModal();
+    });
+	
+   $(".dellinks").on('click',
+    function() {
+        var d = dialog({
+            title: '删除确认',
+            content: '',
+            cancelValue: '取消',
+            okValue: '确定',
+            ok: function() {},
+
+            cancel: function() {}
+        });
+        var elem = $("#confirmBox");
+        d.content(elem).showModal();
+    });
+				   })
+
+               
+               </script> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ctrlBar">
+      <button class="ctrlBtn">返回</button>
+      <button class="ctrlBtn focusBtn">保存</button>
+      <button class="ctrlBtn focusBtn">保存并送审</button>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    var config = {
+      '.chosen-select'           : {},
+      '.chosen-select-deselect'  : {allow_single_deselect:true},
+      '.chosen-select-no-single' : {disable_search_threshold:10},
+      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+      '.chosen-select-width'     : {width:"100%"}
+    }
+    for (var selector in config) {
+      $(selector).chosen(config[selector]);
+    }
+	$('.chosen-select').chosen();
+	</script>
+<div class="messageBox">
+<div class="messageBoxContent">
+  <div class="messageMain">
+    <ul>
+      <li class="messageItem">
+        <div class="messageTime"> <i class="lineBg"></i><b class="timePoint"></b><p class="timeBlock">2017-06-05<br />21:21</p></div>
+        <div class="messageBlock">
+        <h2 class="messageItemTitle">2017年度西商村拟征收土地公告</h2>
+        <p class="cmessageContent">项目由省厅发起，项目位置西宁市上东区，项目文号ABC-123456。</p>
+        <a class="messageTodo" href="plan.html">立即处理</a>
+        </div>
+      </li>
+      <li class="messageItem">
+        <div class="messageTime"> <i class="lineBg"></i><b class="timePoint"></b><p class="timeBlock">2017-06-05<br />21:21</p></div>
+        <div class="messageBlock">
+        <h2 class="messageItemTitle">2017年度西商村拟征收土地公告</h2>
+        <p class="cmessageContent">项目由省厅发起，项目位置西宁市上东区，项目文号ABC-123456。</p>
+        <a class="messageTodo" href="plan.html">立即处理</a>
+        </div>
+      </li>
+      <li class="messageItem">
+        <div class="messageTime"> <i class="lineBg"></i><b class="timePoint"></b><p class="timeBlock">2017-06-05<br />21:21</p></div>
+        <div class="messageBlock">
+        <h2 class="messageItemTitle">2017年度西商村拟征收土地公告</h2>
+        <p class="cmessageContent">项目由省厅发起，项目位置西宁市上东区，项目文号ABC-123456。</p>
+        <a class="messageTodo" href="plan.html">立即处理</a>
+        </div>
+      </li>
+    </ul><div class="loadMore">
+    <a href="javascript:;">加载更多</a>
+    </div>
+  </div>
+  </div>
+  <a class="closeMessageBox" href="javascript:;" onClick="closeMessage(this)"></a>
+ <script type="text/javascript">
+ function closeMessage(obj){
+	 $(obj).parent().slideUp("fast");
+	 }
+  function showMessage(){
+	  $(".messageBox").slideToggle("fast");
+	  }
+ </script>
+</div>
+<div class="hide" id="editGroup">
+<div class="pulicBox clearfix">
+      <div class="newArticle" style="padding-top:0;">
+      <div class="msgEditlabel clearfix">
+          <div class="halfPart"> <em class="frmLabel">公开类型</em>
+            <div class="frmInputBox frmInputBoxNoTextLimit">
+              <div class="selectionGroup">
+                <div class="dropDown"  style="width:220px;">
+                  <select data-placeholder="请选择" class="chosen-select-no-single" tabindex="9">
+                    <option value=""></option>
+                    <option value="United States">主动公开</option>
+                    <option value="United States">依申请公开</option>
+                                      </select>
+                </div>
+              </div>
+            </div>
+            <!--<div class="pagesTips errorText" style="display:block;">一个字也没有，你还想保存？</div>--> 
+          </div>
+          
+        </div>
+      <div class="msgEditlabel">
+    <em class="frmLabel">内容<b class="aboutMsg"></b></em>
+<div class="frmAreaBox foredit">
+    <!--<button onclick="ue.execCommand('removeformat')">清楚格式</button>-->
+    <div class="uedit">
+    <script id="editor" type="text/plain"></script>
+    </div>
+    
+    </div>
+    </div>
+      </div>
+      </div>
+</div>
+<div class="confirmBox hide" id="confirmBox">
+  <div class="uplayoutBox">
+    <div class="addTwoLevelbox"> <span class="tips_icon confirm_icon48"></span>
+      <div class="confirmBoxRight">
+        <h4>删除确认</h4>
+        <p>删除后该文件将不能恢复。</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	//chose_mult_set_ini('.chosen-select', '关于我们,检验周期');
+	});
+    var config = {
+      '.chosen-select'           : {},
+      '.chosen-select-deselect'  : {allow_single_deselect:true},
+      '.chosen-select-no-single' : {disable_search_threshold:10},
+      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+      '.chosen-select-width'     : {width:"100%"}
+    }
+    for (var selector in config) {
+      $(selector).chosen(config[selector]);
+	  
+    }
+	
+	$('.chosen-select').chosen();
+	 //实例化编辑器
+    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    var ue = UE.getEditor('editor');
+	
+ ue.addListener( 'ready', function( editor ) {
+     ue.execCommand( 'focus' ); //编辑器家在完成后，让编辑器拿到焦点
+	$("div[title]",".uedit").showTips({offsetY:24,tipsTxt:function(obj){
+		 return $(obj).attr("title");
+		 }});
+		 
+/*	 $(".edui-icon").showTips({offsetY:24,tipsTxt:function(obj){
+		 return $(obj).parent().attr("title");
+		 }});*/
+ } );
+    function isFocus(e){
+        alert(UE.getEditor('editor').isFocus());
+        UE.dom.domUtils.preventDefault(e)
+    }
+    function setblur(e){
+        UE.getEditor('editor').blur();
+        UE.dom.domUtils.preventDefault(e)
+    }
+    function insertHtml() {
+        var value = prompt('插入html代码', '');
+        UE.getEditor('editor').execCommand('insertHtml', value)
+    }
+    function createEditor() {
+        enableBtn();
+        UE.getEditor('editor');
+    }
+    function getAllHtml() {
+        alert(UE.getEditor('editor').getAllHtml())
+    }
+    function getContent() {
+        var arr = [];
+        arr.push("使用editor.getContent()方法可以获得编辑器的内容");
+        arr.push("内容为：");
+        arr.push(UE.getEditor('editor').getContent());
+        alert(arr.join("\n"));
+    }
+    function getPlainTxt() {
+        var arr = [];
+        arr.push("使用editor.getPlainTxt()方法可以获得编辑器的带格式的纯文本内容");
+        arr.push("内容为：");
+        arr.push(UE.getEditor('editor').getPlainTxt());
+        alert(arr.join('\n'))
+    }
+    function setContent(isAppendTo) {
+        var arr = [];
+        arr.push("使用editor.setContent('欢迎使用ueditor')方法可以设置编辑器的内容");
+        UE.getEditor('editor').setContent('欢迎使用ueditor', isAppendTo);
+        alert(arr.join("\n"));
+    }
+    function setDisabled() {
+        UE.getEditor('editor').setDisabled('fullscreen');
+        disableBtn("enable");
+    }
+
+    function setEnabled() {
+        UE.getEditor('editor').setEnabled();
+        enableBtn();
+    }
+
+    function getText() {
+        //当你点击按钮时编辑区域已经失去了焦点，如果直接用getText将不会得到内容，所以要在选回来，然后取得内容
+        var range = UE.getEditor('editor').selection.getRange();
+        range.select();
+        var txt = UE.getEditor('editor').selection.getText();
+        alert(txt)
+    }
+
+    function getContentTxt() {
+        var arr = [];
+        arr.push("使用editor.getContentTxt()方法可以获得编辑器的纯文本内容");
+        arr.push("编辑器的纯文本内容为：");
+        arr.push(UE.getEditor('editor').getContentTxt());
+        alert(arr.join("\n"));
+    }
+    function hasContent() {
+        var arr = [];
+        arr.push("使用editor.hasContents()方法判断编辑器里是否有内容");
+        arr.push("判断结果为：");
+        arr.push(UE.getEditor('editor').hasContents());
+        alert(arr.join("\n"));
+    }
+    function setFocus() {
+        UE.getEditor('editor').focus();
+    }
+    function deleteEditor() {
+        disableBtn();
+        UE.getEditor('editor').destroy();
+    }
+    function disableBtn(str) {
+        var div = document.getElementById('btns');
+        var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+        for (var i = 0, btn; btn = btns[i++];) {
+            if (btn.id == str) {
+                UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+            } else {
+                btn.setAttribute("disabled", "true");
+            }
+        }
+    }
+    function enableBtn() {
+        var div = document.getElementById('btns');
+        var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+        for (var i = 0, btn; btn = btns[i++];) {
+            UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+        }
+    }
+
+    function getLocalData () {
+        alert(UE.getEditor('editor').execCommand( "getlocaldata" ));
+    }
+
+    function clearLocalData () {
+        UE.getEditor('editor').execCommand( "clearlocaldata" );
+        alert("已清空草稿箱")
+    }
+	</script>
+</body>
+</html>

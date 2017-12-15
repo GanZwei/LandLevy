@@ -1,0 +1,143 @@
+header {
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right:0;
+	padding:12px 0;
+	 background:url(images/graybg.png);
+	text-align: center;
+	z-index:2;
+}
+.warp{ position: absolute; height:100%; width:100%; overflow:auto; min-height:100%;}
+.warpBg{ background:#205085 url(images/loginBg.jpg) no-repeat bottom left; background-size:cover;}
+.systitle {
+	position: relative;
+	display: inline-block;
+	height: 48px;
+	margin-top: 4px;
+	height: 48px;
+	line-height: 44px;
+	color: #fff;
+	font-size: 24px;
+	font-weight: normal;
+}
+.logo {
+	position: relative;
+	text-align: center;
+	margin-top:180px;
+	width:100%;
+}
+.logo img {
+	margin: 0 auto;
+	display: block;
+}
+.loginbox {
+	padding:76px 48px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	background-color:#fff;
+	border-radius:6px;
+	margin:-220px 0 0 -190px;
+}
+.loginbox .logongroup {
+	min-height: 42px;
+	position: relative;
+	margin-bottom: 24px;
+}
+.loginbox .lastChild{ margin-bottom:0;}
+.loginbox .errorbox {
+	background-color: #f9dbdb;
+	min-height: 40px;
+	line-height: 40px;
+	border: 1px solid #f6baba;
+	margin-bottom: 12px;
+	padding: 0 6px 0 36px;
+	color: #e97171;
+	border-radius: 3px;
+	position: relative;
+	display:none;
+}
+.loginbox .logongroup .intext {
+	height: 14px;
+	font-size: 14px;
+	display: block;
+	border:1px solid #ccc;
+	background-color:#f8f8f8;
+	padding: 16px 6px 16px 36px;
+	width: 300px;
+	border-radius: 3px;
+}
+.loginbox .logongroup .intext:focus{ background-color:#fff;}
+.loginbox i, .errorbox i {
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	top: 50%;
+	left: 6px;
+	margin-top: -12px;
+	
+}
+.loginbox i.user {
+	background-image: url(images/user24_gray.png);
+}
+.loginbox i.password {
+	background-image: url(images/password24.png);
+}
+.errorbox i.error {
+}
+.submitbox {
+	padding-top: 6px;
+}
+.logongroup .submitbtn {
+	height: 48px;
+	border: none;
+	width: 100%;
+	padding: 0;
+	background-color: #0d86db;
+	border-radius: 3px;
+	font-size: 20px;
+	color: #fff;
+	cursor: pointer;
+	-moz-transition: all 0.2s;
+	-webkit-transition: all 0.2s;
+	-ms-transition: all 0.2s;
+	transition: all 0.2s;
+}
+.logongroup .submitbtn:hover {
+	background-color: #0469ba;
+}
+.copyright {
+	position: absolute;
+	width: 100%;
+	font-size: 14px;
+	color: #fff;
+	bottom: 10%;
+	bottom:36px;
+	line-height: 24px;
+	text-align: center;
+}
+.loginbox .errorbox {
+  background-color: #f9dbdb;
+  min-height: 40px;
+  line-height: 40px;
+  border: 1px solid #f6baba;
+  margin-bottom: 12px;
+  padding: 0 6px 0 36px;
+  color: #e97171;
+  border-radius: 3px;
+  position: relative;
+  display: none;
+}
+.errorbox i {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 50%;
+  left: 6px;
+  margin-top: -12px;
+  background-image: url(images/errorTipsIcon.png);
+}
+.errorbox i.error {
+}
