@@ -14,4 +14,7 @@ public class Notice {
 	private String reference;
 	private String year;
 	private String project_addr;
+	private String status;
+	private String filepath;
+	private String userid;
 }
