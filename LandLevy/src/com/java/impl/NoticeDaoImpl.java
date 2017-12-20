@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import com.google.gson.JsonObject;
 import com.java.dao.NoticeDao;
 import com.java.ov.Notice;
 
@@ -40,18 +40,30 @@ public class NoticeDaoImpl implements NoticeDao{
 		try {
 			stat=con.prepareStatement(sql);
 			stat.setString(2, str);
+			JsonObject root=null;
 			if(isAccord(str)==1){
+				root=new JsonObject();
 				stat.setString(1, "reference");
-				ResultSet result=stat.executeQuery();	
-				
 			}else if(isAccord(str)==2){
-				
+				stat.setString(1, "apply_name");
+			}
+			ResultSet result=stat.executeQuery();	
+			while(result.next()){
+				String apply=result.getString("apply_name");
+				String reference=result.getString("reference");
+				String project_addr=result.getString("project_addr");
+				String time=result.getString("time");
+				root.addProperty("apply", apply);
+				root.addProperty("reference", reference);
+				root.addProperty("project_addr", project_addr);
+				root.addProperty("time", time);
+				return root.toString();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return null;
+			return null;
 	}
 	private int isAccord(String str){
 		String sql="select ? from noticeinfo where ?=?";
