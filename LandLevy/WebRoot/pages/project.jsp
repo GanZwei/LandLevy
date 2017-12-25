@@ -1,3 +1,4 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
 <head>
@@ -43,8 +44,22 @@ $(function(){
     });
 	});
 	function query(){
-		$.post("Notice/query",{"input-1":$("#input-1").val()})
+		$.post("../Notice/query",{"input-1":$("#input-1").val()})
 	}
+	   function querycity(){
+		var city=$("#city option:selected").text();
+		var ci=$("#city").val();
+		$.post("../Notice/querycity",{"city":ci});
+	}
+	/* $("#county").change(function(){
+		var city=$("#city option:selected").text();
+		var county=$("#county option:selected").text();
+		var falg=false;
+		$.post("../Notice/querycounty",{"cityname":city,"county":county},function(){
+
+		});
+	});*/
+	   
 </script>
 </head>
 
@@ -82,9 +97,17 @@ $(function(){
     <div class="functionBar clearfix">
       <div class="selectionGroup">
         <div class="dropDown"  style="width:90px;">
-          <select data-placeholder="市、州" class="chosen-select-no-single" tabindex="9">
+          <select  name="city" data-placeholder="市、州" class="chosen-select-no-single" tabindex="9">
             <option value=""></option>
-            <option value="United States">所有</option>
+            <c:if test="${empty sessionScope.city }">
+            <c:redirect url="../Notice/querycity">
+            <c:param name="city" value="全部"></c:param>
+            </c:redirect>
+            </c:if>
+            <option value="qwe">所有</option>
+            <c:forEach items="${ sessionScope.city}" var="city" begin="0">
+            <option value="United States"><c:out value="${city}"/></option>
+            </c:forEach>
             <option value="United States">已发布</option>
             <option value="United States">未发布</option>
           </select>
@@ -92,11 +115,17 @@ $(function(){
       </div>
       <div class="selectionGroup">
         <div class="dropDown"  style="width:120px;">
-          <select data-placeholder="所在区" class="chosen-select-no-single" tabindex="9">
-            <option value=""></option>
-            <option value="United States">全部</option>
-            <option value="United States">已发布</option>
-            <option value="United States">未发布</option>
+          <select data-placeholder="所在区" class="chosen-select-no-single" tabindex="9" name="county" 
+          onchange="javascript:window.location.href='<%=request.getContextPath()%>/Notice/querycounty'">
+            <option value="所有"></option>
+            <option value="所有">全部</option>
+            <c:if test="${!empty requestScope.county }">
+            <c:forEach items="${ requestScope.county}" var="county" begin="0">
+            <option value="United States"><c:out value="${county}"/></option>
+            </c:forEach>
+            </c:if>
+            <option value="所有">已发布</option>
+            <option value="所有">未发布</option>
           </select>
         </div>
       </div>
@@ -132,15 +161,21 @@ $(function(){
               <th>状态</th>
               <th>操作</th>
             </tr>
+    	 <c:if test="${!empty sessionScope.list }">
             <tr>
-              <td><span class="btnChose ctrlChosen selected" onclick="checkboxSelect(this)">
+				 <td><span class="btnChose ctrlChosen selected" onclick="checkboxSelect(this)">
                 <input name="" type="checkbox" value="" />
                 <i></i></span></td>
-              <td><a href="projectDetail.html" class="heightColor">2017年度西商村拟征收土地公告</a></td>
-              <td>ABC-123456</td>
-              <td>三坐标</td>
-              <td>2015</td>
-              <td>省厅发起</td>
+              <c:forEach items="${sessionScope.list }" var="list">
+              	<c:if test="${list.status=='省厅发起'}">
+              		 <td><a href="projectDetail.html" class="heightColor"><c:out value="${list.apply }"></c:out></a></td>
+              	</c:if>	 
+             		 <td><c:out value="${list.reference}"></c:out></td>
+             		 <td><c:out value="${list.address}"></c:out></td>
+             		 <td><c:out value="${list.year}"></c:out></td>
+             		 <td><c:out value="${list.status}"></c:out></td>
+              </c:forEach>
+              	
               <td><span class="heightColor moreTips">详情<i class="tipsIcon"></i>
                 <div class="menuGroupBox">
                   <ul>
@@ -151,6 +186,7 @@ $(function(){
                 </div>
                 </span></td>
             </tr>
+         </c:if> 
             <tr>
               <td><span class="btnChose ctrlChosen selected" onclick="checkboxSelect(this)">
                 <input name="" type="checkbox" value="" />

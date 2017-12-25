@@ -4,9 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.java.dao.NoticeDao;
 import com.java.ov.Notice;
+import com.java.ov.SimpleNotice;
+import com.java.utils.ResponseUtil;
+
+import sun.font.CreatedFontTracker;
 
 public class NoticeDaoImpl implements NoticeDao{
 	private Connection con;
@@ -35,52 +42,71 @@ public class NoticeDaoImpl implements NoticeDao{
 		}
 	}
 	@Override
-	public String queryNotice(String str) {
-		String sql="select apply_name,reference,project_addr,time from noticeinfo where ?=?";
+	public String queryNotice(String str){
+		//sql查询语句
+		String sql="select apply_name,reference,a.city,a.county,a.village,year,ps.status from noticeinfo as n "
+				+"inner join address as a on a.id=n.project_addr "
+				+"inner join publish_status as ps on ps.id=n.status "
+				+ "where reference=?;";
+		String sql1="select apply_name,reference,a.city,a.county,a.village,year,ps.status from noticeinfo as n "
+				+"inner join address as a on a.id=n.project_addr "
+				+"inner join publish_status as ps on ps.id=n.status "
+				+"where apply_name=?;";
+		String info=null;
 		try {
-			stat=con.prepareStatement(sql);
-			stat.setString(2, str);
-			JsonObject root=null;
 			if(isAccord(str)==1){
-				root=new JsonObject();
-				stat.setString(1, "reference");
+				stat=con.prepareStatement(sql);
+				stat.setString(1, str);
 			}else if(isAccord(str)==2){
-				stat.setString(1, "apply_name");
+				stat=con.prepareStatement(sql1);
+				stat.setString(1, str);
 			}
-			ResultSet result=stat.executeQuery();	
+			if(isAccord(str)!=0){
+			ResultSet result=stat.executeQuery();
+			List<SimpleNotice> sm=new ArrayList<SimpleNotice>();
 			while(result.next()){
 				String apply=result.getString("apply_name");
 				String reference=result.getString("reference");
-				String project_addr=result.getString("project_addr");
-				String time=result.getString("time");
-				root.addProperty("apply", apply);
-				root.addProperty("reference", reference);
-				root.addProperty("project_addr", project_addr);
-				root.addProperty("time", time);
-				return root.toString();
+				String city=result.getString(3);
+				String county=result.getString(4);
+				String village=result.getString(5);
+				String address=city+county+village;
+				String year=result.getString("year");
+				String status=result.getString(7);
+				SimpleNotice notice=new SimpleNotice(apply, reference, address, year, status);
+				sm.add(notice);
+				}
+			info=ResponseUtil.createModelJson(sm);
+			stat.close();
 			}
+			return info;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return ResponseUtil.createErrorJson("数据库错误");
 		}
-
-			return null;
 	}
 	private int isAccord(String str){
-		String sql="select ? from noticeinfo where ?=?";
+		String sql="select count(*) from noticeinfo where reference=?";
 		try {
-			stat=con.prepareStatement(sql);
-			stat.setString(1, "reference");
-			stat.setString(2, "reference");
-			stat.setString(3, str);
-			ResultSet result=stat.executeQuery();
+			PreparedStatement prepar=con.prepareStatement(sql);
+			prepar.setString(1, str);
+			ResultSet result=prepar.executeQuery();
 			if(result.next()){
+				int count =result.getInt("count(*)");
+				if(count!=0){
+				prepar.close();
 				return 1;
-			}else{
-				stat.setString(1, "apply_name");
-				stat.setString(2, "apply_name");
-				result=stat.executeQuery();
-				if(result.next()){
-					return 2;
+				}
+			}
+			String sql1="select count(*) from noticeinfo where apply_name=?";
+			PreparedStatement pre=con.prepareStatement(sql1);
+			pre.setString(1, str);
+			ResultSet res=pre.executeQuery();
+			if(res.next()){
+				int count =res.getInt("count(*)");
+				if(count!=0){
+				pre.close();
+				return 2;
 				}
 			}
 		} catch (SQLException e) {

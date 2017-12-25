@@ -1,5 +1,7 @@
 package com.java.proxy;
 
+import org.junit.Test;
+
 import com.java.dao.NoticeDao;
 import com.java.dbc.DatabaseConnection;
 import com.java.impl.NoticeDaoImpl;
@@ -26,7 +28,20 @@ public class NoticeDaoProxy implements NoticeDao{
 
 	@Override
 	public String queryNotice(String str) {
-		return null;
+		String info=dao.queryNotice(str);
+		try {
+			dbc.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return info;
 	}
+	@Test
+	public void test(){
+		dao.addNotice(new Notice("单独选址项目","2017-06-05 17:40:00	2017","年度西商村拟征收土地公告","ABC-123456"	,"2016","1","1","http","1"));
+//		String info=dao.queryNotice("ABC-123456");
+//		System.out.println(info);
+	}
+
 
 }
