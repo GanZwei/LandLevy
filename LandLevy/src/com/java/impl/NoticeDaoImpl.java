@@ -6,14 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.java.dao.NoticeDao;
 import com.java.ov.Notice;
 import com.java.ov.SimpleNotice;
 import com.java.utils.ResponseUtil;
-
-import sun.font.CreatedFontTracker;
 
 public class NoticeDaoImpl implements NoticeDao{
 	private Connection con;
@@ -26,13 +22,19 @@ public class NoticeDaoImpl implements NoticeDao{
 		String sql="insert into noticeinfo(projecttype,time,apply_name,reference,year,project_addr,file,status,userid) "
 				+"value(?,?,?,?,?,?,?,?,?)";
 		try {
+			String city=notice.getCity();
+			System.out.println(city+"这是city");
+			String county=notice.getCounty();
+			String village=notice.getVillage();
+			insertAddress(city, county, village);
+			String project_adrr=queryAddressID(city, county, village);
 			stat=con.prepareStatement(sql);
 			stat.setString(1,notice.getProjecttype());
 			stat.setString(2,notice.getTime());
 			stat.setString(3,notice.getAaply_name());
 			stat.setString(4,notice.getReference());
 			stat.setString(5,notice.getYear());
-			stat.setString(6,notice.getProject_addr());
+			stat.setString(6,project_adrr);
 			stat.setString(7,notice.getFilepath());
 			stat.setString(8,notice.getStatus());
 			stat.setString(9,notice.getUserid());
@@ -40,6 +42,38 @@ public class NoticeDaoImpl implements NoticeDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	private void insertAddress(String city,String county,String village){
+		String sql="insert into `address`(city,county,village) value(?,?,?)";
+				try {
+					stat=con.prepareStatement(sql);
+					stat.setString(1, city);
+					stat.setString(2, county);
+					stat.setString(3, village);
+					stat.execute();
+					stat.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+	}
+	private String queryAddressID(String city,String county,String village){
+		String adId=null;
+		String sql="select id from address where city=? and county=? and village=?";
+		try {
+			stat=con.prepareStatement(sql);
+			stat.setString(1, city);
+			stat.setString(2, county);
+			stat.setString(3, village);
+			ResultSet res=stat.executeQuery();
+			if(res.next()){
+				adId=res.getString(1);
+			}
+			stat.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return adId;
 	}
 	@Override
 	public String queryNotice(String str){
@@ -114,4 +148,41 @@ public class NoticeDaoImpl implements NoticeDao{
 		}
 		return 0;
 	}
+	@Override
+	public String getPageNewsList(int pageNo, int pagePerCount,String where) {
+		        List<SimpleNotice> newslist =new ArrayList<SimpleNotice>();
+		        String result="";
+		          String sql = "select apply_name,reference,a.city,a.county,a.village,year,ps.status,time from noticeinfo as n "
+		  				+"inner join address as a on a.id=n.project_addr "
+						+"inner join publish_status as ps on ps.id=n.status "
+						+where+" limit ?,?;";
+		              try {
+		            	  stat=con.prepareStatement(sql);
+				          	stat.setInt(1, (pageNo-1)*pagePerCount);
+				          	stat.setInt(2, pagePerCount);
+				            ResultSet rs = stat.executeQuery();
+				            int totalPage=0;
+		                 while(rs.next()){
+//		                	 int count = rs.getInt(1);
+//		         			 totalPage = count%pagePerCount == 0? count/pagePerCount : count/pagePerCount+1;
+		                     String apply=rs.getString("apply_name");
+		     				 String reference=rs.getString("reference");
+		     				 String city=rs.getString(3);
+		     				 String county=rs.getString(4);
+		     				 String village=rs.getString(5);
+		     				 String address=city+county+village;
+		     				 String year=rs.getString("year");
+		     				 String status=rs.getString(7);
+		     				 SimpleNotice notice=new SimpleNotice(apply, reference, address, year, status);
+		     				newslist.add(notice);
+		                 }
+		              result=  ResponseUtil.createModelWithPageJson(newslist, totalPage);
+		                 stat.close();
+		             } catch (SQLException e) {
+		                 e.printStackTrace();
+		             }finally{
+		             }
+		         return result;
+		     }
+	
 }

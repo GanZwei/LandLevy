@@ -36,11 +36,16 @@ public class NoticeDaoProxy implements NoticeDao{
 		}
 		return info;
 	}
-	@Test
-	public void test(){
-		dao.addNotice(new Notice("单独选址项目","2017-06-05 17:40:00	2017","年度西商村拟征收土地公告","ABC-123456"	,"2016","1","1","http","1"));
-//		String info=dao.queryNotice("ABC-123456");
-//		System.out.println(info);
+	@Override
+	public String getPageNewsList(int pageNo, int pagePerCount, String where) {
+		String info=null;
+		try {
+			info=dao.getPageNewsList(pageNo, pagePerCount, where);
+			dbc.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return info;
 	}
 
 

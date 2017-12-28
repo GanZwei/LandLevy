@@ -13,7 +13,10 @@ public class Notice {
 	private String aaply_name;
 	private String reference;
 	private String year;
-	private String project_addr;
+	private String city;
+	private String county;
+	private String village;
+	private String burg;
 	private String status;
 	private String filepath;
 	private String userid;

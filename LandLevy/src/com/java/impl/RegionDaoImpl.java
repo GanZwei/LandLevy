@@ -58,12 +58,11 @@ public class RegionDaoImpl implements RegionDao{
 		return result;
 	}
 	@Override
-	public String countyQuery(String str, String city) {
+	public String countyQuery( String city) {
 		String sql="select name from county where cityid=?";
 		String id=queryCityidByname(city);
 		List<String> list=new ArrayList<String>();
 		String result=null;
-		if(isCondition(str)==1){
 		try {
 			stat=con.prepareStatement(sql);
 			stat.setString(1, id);
@@ -77,7 +76,6 @@ public class RegionDaoImpl implements RegionDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
 		return result;
 	}
 	private String queryCityidByname(String city){
@@ -97,7 +95,40 @@ public class RegionDaoImpl implements RegionDao{
 	return cityid;
 	}
 	@Override
-	public String villageQuery(String str, String county) {
-		return null;
+	public String villageQuery(String county) {
+		String sql="select name from village where countyid=?";
+		String id=queryCountyidByname(county);
+		List<String> list=new ArrayList<String>();
+		String result=null;
+		try {
+			stat=con.prepareStatement(sql);
+			stat.setString(1, id);
+			ResultSet res=stat.executeQuery();
+			while(res.next()){
+				String countyname=res.getString("name");
+				list.add(countyname);
+			}
+			result=ResponseUtil.createModelJson(list);
+			stat.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	private String queryCountyidByname(String county){
+		String sql="select id from county where name=?";
+		String countyid=null;
+		try {
+			stat=con.prepareStatement(sql);
+			stat.setString(1, county);
+			ResultSet res=stat.executeQuery();
+			if(res.next()){
+				countyid=res.getString(1);
+			}
+			stat.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	return countyid;
 	}
 }

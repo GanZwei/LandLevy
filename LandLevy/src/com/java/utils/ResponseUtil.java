@@ -25,4 +25,12 @@ public class ResponseUtil {
 		obj.addProperty("data", json);
 		return obj.toString();
 	}
+	public static String createModelWithPageJson(Object o, int page){
+		String json = new Gson().toJson(o);
+		JsonObject obj = new JsonObject();
+		obj.addProperty("status", true);
+		obj.addProperty("totalPage", page);
+		obj.addProperty("data", json);
+		return obj.toString();
+	}
 }

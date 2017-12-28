@@ -13,12 +13,12 @@ public interface RegionDao {
 	 * @param city 城市名称
 	 * @return 县区信息
 	 */
-	String countyQuery(String str,String city);
+	String countyQuery(String city);
 	/**
 	 * 
 	 * @param str 查询条件（全部，已发布，未发布）
 	 * @param county 县城名称
 	 * @return
 	 */
-	String villageQuery(String str ,String county);
+	String villageQuery(String county);
 }

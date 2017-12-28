@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta name="Description" content=""/>
 <meta name="keywords" content=""/>
@@ -17,6 +17,19 @@
 <script type="text/javascript" src="../javascript/chosen/chosen.jquery.min.js"></script>
 <script type="text/javascript" src="../javascript/artDialog-master/dist/dialog-plus-min.js"></script>
 <script type="text/javascript">
+var config = {
+      '.chosen-select'           : {},
+      '.chosen-select-deselect'  : {allow_single_deselect:true},
+      '.chosen-select-no-single' : {disable_search_threshold:10},
+      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+      '.chosen-select-width'     : {width:"100%"}
+    }
+    $(document).ready(function(){
+   					 for (var selector in config) {
+			   		 $(selector).chosen(config[selector]);
+			   		 }
+					$('.chosen-select').chosen();      
+    });
 function checkboxSelect(obj){
 	if($(obj).hasClass("selected")){
 		$(obj).removeClass("selected");
@@ -43,22 +56,44 @@ $(function(){
         d.content(elem).showModal();
     });
 	});
-	function query(){
-		$.post("../Notice/query",{"input-1":$("#input-1").val()})
-	}
-	   function querycity(){
+	 function querycounty(){
+	 	$(".countys").empty();
+	 			for (var selector in config) {
+			    $(selector).chosen(config[selector]);
+			    }
+				$('.chosen-select').chosen();
 		var city=$("#city option:selected").text();
-		var ci=$("#city").val();
-		$.post("../Notice/querycity",{"city":ci});
+		$.post("../Notice/querycounty",{"cityname":city},function(resp,status){
+			var data=eval("("+resp.data+")");
+			$("#county").chosen("destroy");
+			for(var i=0;i<data.length;i++){
+				 $("#county").append("<option class='countys' value='"+data[i]+"'>"+data[i]+"</option>");
+			}
+			   for (var selector in config) {
+			    $(selector).chosen(config[selector]);
+			    }
+				$('.chosen-select').chosen();
+		},"json");
 	}
-	/* $("#county").change(function(){
-		var city=$("#city option:selected").text();
+	 function queryvillage(){
+	 	$(".villages").empty();
+	 			for (var selector in config) {
+			    $(selector).chosen(config[selector]);
+			    }
+				$('.chosen-select').chosen();
 		var county=$("#county option:selected").text();
-		var falg=false;
-		$.post("../Notice/querycounty",{"cityname":city,"county":county},function(){
-
-		});
-	});*/
+		$.post("../Notice/queryvillage",{"countyname":county},function(resp,status){
+			var data=eval("("+resp.data+")");
+			$("#village").chosen("destroy");
+			for(var i=0;i<data.length;i++){
+				 $("#village").append("<option class='villages' value='"+data[i]+"'>"+data[i]+"</option>");
+			}
+			   for (var selector in config) {
+			    $(selector).chosen(config[selector]);
+			    }
+				$('.chosen-select').chosen();
+		},"json");
+	}
 	   
 </script>
 </head>
@@ -92,46 +127,32 @@ $(function(){
       <li><a href="project.html" class="end"><i></i><span>已发布项目</span></a></li>
     </ul>
   </div>
+  
   <div class="wrp hasleft clearfix">
-
+ <form action="<%=request.getContextPath() %>/Notice/query">
     <div class="functionBar clearfix">
       <div class="selectionGroup">
-        <div class="dropDown"  style="width:90px;">
-          <select  name="city" data-placeholder="市、州" class="chosen-select-no-single" tabindex="9">
+        <div class="dropDown"  style="width:90px;" >
+          <select  name="city" data-placeholder="市、州" class="chosen-select-no-single" tabindex="9" id="city" onchange="querycounty()"">
             <option value=""></option>
             <c:if test="${empty sessionScope.city }">
-            <c:redirect url="../Notice/querycity">
-            <c:param name="city" value="全部"></c:param>
-            </c:redirect>
+	            <c:redirect url="../Notice/querycity">
+	            	<c:param name="city" value="全部"></c:param>
+	            </c:redirect>
             </c:if>
-            <option value="qwe">所有</option>
+            <option value="United States">所有</option>
             <c:forEach items="${ sessionScope.city}" var="city" begin="0">
-            <option value="United States"><c:out value="${city}"/></option>
+            <option value="${city}"><c:out value="${city}"/></option>
             </c:forEach>
             <option value="United States">已发布</option>
             <option value="United States">未发布</option>
           </select>
+          
         </div>
       </div>
       <div class="selectionGroup">
         <div class="dropDown"  style="width:120px;">
-          <select data-placeholder="所在区" class="chosen-select-no-single" tabindex="9" name="county" 
-          onchange="javascript:window.location.href='<%=request.getContextPath()%>/Notice/querycounty'">
-            <option value="所有"></option>
-            <option value="所有">全部</option>
-            <c:if test="${!empty requestScope.county }">
-            <c:forEach items="${ requestScope.county}" var="county" begin="0">
-            <option value="United States"><c:out value="${county}"/></option>
-            </c:forEach>
-            </c:if>
-            <option value="所有">已发布</option>
-            <option value="所有">未发布</option>
-          </select>
-        </div>
-      </div>
-      <div class="selectionGroup">
-        <div class="dropDown"  style="width:120px;">
-          <select data-placeholder="所在街道" class="chosen-select-no-single" tabindex="9">
+          <select data-placeholder="所在区" class="chosen-select-no-single" tabindex="9" name="county" id="county" onchange="queryvillage()">
             <option value=""></option>
             <option value="United States">全部</option>
             <option value="United States">已发布</option>
@@ -139,13 +160,27 @@ $(function(){
           </select>
         </div>
       </div>
-      <div class="queryGroup"> <span class="searchBox">
-        <input type="text" placeholder="请输入公告名称或文号的关键字" class="searchMain" id="input-1">
-        <a href="javascript:;" class="removeText"><i></i></a>
-        <button class="searchBtn" onclick="query()"><i></i></button>
-        </span> </div>
-      
+      <div class="selectionGroup">
+        <div class="dropDown"  style="width:120px;">
+          <select data-placeholder="所在街道" class="chosen-select-no-single" tabindex="9" id="village" name="village">
+            <option value=""></option>
+            <option value="United States">全部</option>
+            <option value="United States">已发布</option>
+            <option value="United States">未发布</option>
+          </select>
+        </div>
+      </div>
+     
+	      <div class="queryGroup"> <span class="searchBox">
+	        <input type="text" placeholder="请输入公告名称或文号的关键字" class="searchMain" name="input-1">
+	        <a href="javascript:;" class="removeText"><i></i></a>
+	        <button class="searchBtn" type="submit" onclick="javascript:window.location.href='<%=request.getContextPath()%>/Notice/query'"><i></i></button>
+	        </span> 
+	        <input type="hidden" id="pageIndex" name="pageIndex" value="1"/>
+	        <input type="hidden" name="pageSize" value="10"/>
+	        </div>
     </div>
+   </form>
     <div class="dataWrap">
       <div class="dataGrid">
         <div class="gridMain">
@@ -162,20 +197,30 @@ $(function(){
               <th>操作</th>
             </tr>
     	 <c:if test="${!empty sessionScope.list }">
+    	    <c:forEach items="${sessionScope.list }" var="list">
             <tr>
 				 <td><span class="btnChose ctrlChosen selected" onclick="checkboxSelect(this)">
                 <input name="" type="checkbox" value="" />
                 <i></i></span></td>
-              <c:forEach items="${sessionScope.list }" var="list">
               	<c:if test="${list.status=='省厅发起'}">
-              		 <td><a href="projectDetail.html" class="heightColor"><c:out value="${list.apply }"></c:out></a></td>
+              		 <td><a href="projectDetail.jsp" class="heightColor"><c:out value="${list.apply}"></c:out></a></td>
+              	</c:if>
+              		<c:if test="${list.status=='县级填报'}">
+              		 <td><a href="projectDetail01.html" class="heightColor"><c:out value="${list.apply}"></c:out></a></td>
               	</c:if>	 
+              		<c:if test="${list.status=='市（州）级填报'}">
+              		 <td><a href="projectDetail02.html" class="heightColor"><c:out value="${list.apply}"></c:out></a></td>
+              	</c:if>	 
+              		<c:if test="${list.status=='省厅审核'}">
+              		 <td><a href="projectDetail03.html" class="heightColor"><c:out value="${list.apply}"></c:out></a></td>
+              	</c:if>	 
+              		<c:if test="${list.status=='发布成功'}">
+              		 <td><a href="projectDetail04.html" class="heightColor"><c:out value="${list.apply}"></c:out></a></td>
+              	</c:if>	 	 
              		 <td><c:out value="${list.reference}"></c:out></td>
              		 <td><c:out value="${list.address}"></c:out></td>
              		 <td><c:out value="${list.year}"></c:out></td>
-             		 <td><c:out value="${list.status}"></c:out></td>
-              </c:forEach>
-              	
+             		 <td><c:out value="${list.status}"></c:out></td> 	
               <td><span class="heightColor moreTips">详情<i class="tipsIcon"></i>
                 <div class="menuGroupBox">
                   <ul>
@@ -186,7 +231,8 @@ $(function(){
                 </div>
                 </span></td>
             </tr>
-         </c:if> 
+         </c:forEach>
+       </c:if> 
             <tr>
               <td><span class="btnChose ctrlChosen selected" onclick="checkboxSelect(this)">
                 <input name="" type="checkbox" value="" />
@@ -289,17 +335,7 @@ $(function(){
   </div>
 </div>
 <script type="text/javascript">
-    var config = {
-      '.chosen-select'           : {},
-      '.chosen-select-deselect'  : {allow_single_deselect:true},
-      '.chosen-select-no-single' : {disable_search_threshold:10},
-      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-      '.chosen-select-width'     : {width:"100%"}
-    }
-    for (var selector in config) {
-      $(selector).chosen(config[selector]);
-    }
-	$('.chosen-select').chosen();
+    
 	</script>
 <div class="messageBox">
 <div class="messageBoxContent">

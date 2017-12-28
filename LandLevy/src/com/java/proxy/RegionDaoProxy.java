@@ -23,10 +23,10 @@ public class RegionDaoProxy implements RegionDao{
 		return result;
 	}
 	@Override
-	public String countyQuery(String str, String city) {
+	public String countyQuery(String city) {
 		String result=null;
 		try {
-			result=dao.countyQuery(str, city);
+			result=dao.countyQuery(city);
 			dbc.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -34,9 +34,15 @@ public class RegionDaoProxy implements RegionDao{
 		return result;
 	}
 	@Override
-	public String villageQuery(String str, String county) {
-		// TODO Auto-generated method stub
-		return null;
+	public String villageQuery(String county) {
+		String result=null;
+		try {
+			result=dao.villageQuery(county);
+			dbc.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }
